@@ -15,14 +15,13 @@ class Thanks: Identifiable {
     var body: String
     var date: Date
     var isFavorite: Bool
-    var image: Image?
+    @Attribute(.externalStorage) var photo: Data? = nil
     
-    init(title: String, body: String, date: Date, isFavorite: Bool, image: Image? = nil) {
+    init(title: String, body: String, date: Date, isFavorite: Bool) {
         self.title = title
         self.body = body
         self.date = date
         self.isFavorite = isFavorite
-        self.image = image
     }
 }
 
@@ -37,5 +36,7 @@ extension Thanks {
         container.mainContext.insert(Thanks(title: "Food", body: "It nourishes my body", date: Date(), isFavorite: false))
         container.mainContext.insert(Thanks(title: "TV", body: "It keeps me entertained", date: Date(), isFavorite: false))
         container.mainContext.insert(Thanks(title: "Radio", body: "For when the TV doesn't work", date: Date(), isFavorite: true))
+        
+        return container
     }
 }
