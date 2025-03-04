@@ -8,8 +8,29 @@
 import SwiftUI
 
 struct AddThanksView: View {
+    
+    @State private var title: String = ""
+    @State private var reason: String = ""
+    @State private var isFavorite: Bool = false
+    
+    
     var body: some View {
-        Text("This is the AddThanksView")
+        Form {
+            TextField("What are you grateful for?", text: $title)
+            ZStack(alignment: .leading) {
+                if reason.isEmpty {
+                    Text("Write a reason why you're grateful.")
+                        .foregroundColor(.secondary.opacity(0.5))
+                    
+                }
+                
+                TextEditor(text: $reason)
+                    .frame(height: 150)
+                    .foregroundColor(reason == reason ? .gray : .primary)
+            }
+            
+            Toggle("Mark as Favorite", isOn: $isFavorite)
+        }
     }
 }
 
