@@ -9,7 +9,14 @@ import SwiftUI
 
 struct SettingsView: View {
     var body: some View {
-        Text("Settings View")
+        VStack {
+            Text("Settings View")
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background {
+            Color("BackgroundColors")
+                .ignoresSafeArea()
+        }
     }
 }
 

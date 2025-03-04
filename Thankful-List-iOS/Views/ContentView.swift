@@ -10,9 +10,15 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            Tab("Add Thanks", systemImage: "heart.square") {
+            Tab("Thanks List", systemImage: "list.star") {
                 NavigationStack {
-                    AddThanksView()
+                    ListThanksView()
+                }
+            }
+            
+            Tab("Add Thanks", systemImage: "gear.circle") {
+                NavigationStack {
+                    SettingsView()
                 }
             }
         }

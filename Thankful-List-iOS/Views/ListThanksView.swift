@@ -14,11 +14,24 @@ struct ListThanksView: View {
     @Query private var thanksList: [Thanks]
     
     var body: some View {
-        List {
-            ForEach(thanksList) { thanks in
-                Text(thanks.title)
+        VStack {
+            List {
+                ForEach(thanksList) { thanks in
+                    Text(thanks.title)
+                        .foregroundStyle(Color("TextColors"))
+                }
+            }
+            .background(Color("BackgroundColors"))
+            .scrollContentBackground(.hidden)
+            .overlay {
+                if thanksList.isEmpty {
+                    ContentUnavailableView("You don't have any Thanks yet!  ", image: "heart.square", description: Text("Add something your thankful for to begin the list!"))
+                        .background(Color("BackgroundColors"))
+                        .foregroundStyle(Color("TextColors"))
+                }
             }
         }
+        
     }
 }
 
