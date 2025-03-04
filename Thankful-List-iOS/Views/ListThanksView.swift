@@ -6,13 +6,37 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ListThanksView: View {
+    
+    @Environment(\.modelContext) private var modelContext
+    @Query private var thanksList: [Thanks]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            ForEach(thanksList) { thanks in
+                Text(thanks.title)
+            }
+        }
     }
 }
 
-#Preview {
+#Preview("Empty List") {
     ListThanksView()
+        .modelContainer(for: Thanks.self, inMemory: true)
+}
+
+#Preview("Thanks List") {
+    
+    let sampleThanks = Thanks.sampleThanks
+    
+    let container = try! ModelContainer(for: Thanks.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    
+    for thanks in sampleThanks {
+        container.mainContext.insert(thanks)
+    }
+    
+    return ListThanksView()
+        .modelContainer(container)
 }
