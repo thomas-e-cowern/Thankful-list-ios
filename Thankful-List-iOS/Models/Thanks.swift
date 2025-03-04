@@ -12,14 +12,14 @@ import SwiftData
 class Thanks: Identifiable {
     var id = UUID()
     var title: String
-    var body: String
+    var reason: String
     var date: Date
     var isFavorite: Bool
     @Attribute(.externalStorage) var photo: Data? = nil
     
     init(title: String, body: String, date: Date, isFavorite: Bool) {
         self.title = title
-        self.body = body
+        self.reason = body
         self.date = date
         self.isFavorite = isFavorite
     }
