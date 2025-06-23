@@ -5,7 +5,7 @@
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIImageName</key>
-		<string>GLNoBackground</string>
+		<string>GratefulListSplash</string>
 	</dict>
 </dict>
 </plist>
