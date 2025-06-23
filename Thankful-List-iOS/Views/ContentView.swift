@@ -22,9 +22,16 @@ struct ContentView: View {
                 }
             }
         }
+        .tint(TLCustomColors.accentsColors)
     }
 }
 
-#Preview {
+#Preview("Light Mode") {
     ContentView()
+        .preferredColorScheme(.light)
+}
+
+#Preview("Dark Mode") {
+    ContentView()
+        .preferredColorScheme(.dark)
 }
