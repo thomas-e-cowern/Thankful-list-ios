@@ -18,16 +18,16 @@ struct ListThanksView: View {
             List {
                 ForEach(thanksList) { thanks in
                     Text(thanks.title)
-                        .foregroundStyle(Color("TextColors"))
+                        .foregroundStyle(TLCustomColors.textColors)
                 }
             }
-            .background(Color("BackgroundColors"))
+            .background(TLCustomColors.backgroundColors)
             .scrollContentBackground(.hidden)
             .overlay {
                 if thanksList.isEmpty {
                     ContentUnavailableView("You don't have any Thanks yet!  ", image: "heart.square", description: Text("Add something your thankful for to begin the list!"))
-                        .background(Color("BackgroundColors"))
-                        .foregroundStyle(Color("TextColors"))
+                        .background(TLCustomColors.backgroundColors)
+                        .foregroundStyle(TLCustomColors.textColors)
                 }
             }
         }

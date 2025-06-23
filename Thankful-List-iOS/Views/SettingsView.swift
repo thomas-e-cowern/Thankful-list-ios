@@ -9,16 +9,13 @@ import SwiftUI
 
 struct SettingsView: View {
     var body: some View {
-        ZStack {
-            Color("BacgroundColors")
-            VStack {
-                Text("Settings View")
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background {
-                Color("BackgroundColors")
-                    .ignoresSafeArea()
-            }
+        VStack {
+            Text("Settings View")
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background {
+            Color(TLCustomColors.backgroundColors)
+                .ignoresSafeArea()
         }
     }
 }
