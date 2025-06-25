@@ -8,20 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var index: Int = 0
+    
     var body: some View {
-        TabView {
-            Tab("Thanks List", systemImage: "list.star") {
-                NavigationStack {
-                    ListThanksView()
-                }
+        
+        VStack {
+            Spacer()
+            
+            switch index {
+            case 0:
+                HomeView()
+            case 1:
+                ListThanksView()
+            case 2:
+                FavoritesView()
+            case 3:
+                SettingsView()
+            default :
+                HomeView()
             }
             
-            Tab("Add Thanks", systemImage: "gear.circle") {
-                NavigationStack {
-                    SettingsView()
-                }
-            }
+            TLCustomTabBarView(index: $index)
         }
+        .ignoresSafeArea(.all)
         .tint(TLCustomColors.accentsColors)
     }
 }
