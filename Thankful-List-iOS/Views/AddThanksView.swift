@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AddThanksView: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     @State private var title: String = ""
     @State private var reason: String = ""
     @State private var isFavorite: Bool = false
@@ -40,6 +42,21 @@ struct AddThanksView: View {
                     } label: {
                         isFavorite ? Image(systemName: "heart.fill") : Image(systemName: "heart")
                     }
+                }
+                HStack() {
+                    Button("Save") {
+                        // More to come...
+                        dismiss()
+                    }
+                    .buttonStyle(.bordered)
+                    
+                    Spacer()
+                    
+                    Button("Cancel") {
+                        // More to come...
+                        dismiss()
+                    }
+                    .buttonStyle(.bordered)
                 }
             }
         }
