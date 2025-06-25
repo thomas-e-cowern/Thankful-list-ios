@@ -17,8 +17,18 @@ struct ListThanksView: View {
         VStack {
             List {
                 ForEach(thanksList) { thanks in
-                    Text(thanks.title)
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(thanks.title)
+                            
+                            Text("\(thanks.date, style: .date)")
+                                .font(.caption)
+                        }
                         .foregroundStyle(TLCustomColors.textColors)
+                        
+                        Spacer()
+                        Image(systemName: "heart.fill")
+                    }
                 }
             }
             .background(TLCustomColors.backgroundColors)
