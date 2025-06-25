@@ -24,6 +24,7 @@ struct FavoritesView: View {
                         Image(systemName: "heart.fill")
                     }
                 }
+                .foregroundStyle(TLCustomColors.textColors)
             }
         }
     }
