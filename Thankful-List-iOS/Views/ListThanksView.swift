@@ -18,6 +18,11 @@ struct ListThanksView: View {
             List {
                 ForEach(thanksList) { thanks in
                     HStack {
+                        
+                        Image(systemName: thanks.icon)
+                            .foregroundStyle(thanks.hexColor.opacity(0.8))
+                            .padding(.trailing, 5)
+                        
                         VStack(alignment: .leading) {
                             Text(thanks.title)
                             
@@ -28,6 +33,7 @@ struct ListThanksView: View {
                         
                         Spacer()
                         Image(systemName: "heart.fill")
+                            .foregroundStyle(.red)
                     }
                 }
             }
