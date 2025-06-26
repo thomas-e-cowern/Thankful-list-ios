@@ -12,9 +12,10 @@ struct ListThanksView: View {
     
     @Environment(\.modelContext) private var modelContext
     @Query private var thanksList: [Thanks]
+    @State private var path = [Thanks]()
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             VStack {
                 List {
                     ForEach(thanksList) { thanks in
@@ -24,6 +25,7 @@ struct ListThanksView: View {
                             }
                         }
                     }
+                    .onDelete(perform: deleteThanks)
                 }
                 .background(TLCustomColors.backgroundColors)
                 .scrollContentBackground(.hidden)
@@ -37,10 +39,37 @@ struct ListThanksView: View {
             }
             .navigationTitle("Thankful List")
             .navigationDestination(for: Thanks.self) { thanks in
-                ThanksDetailView(thanks: thanks)
+                EditThanksView(thanks: thanks)
+            }
+            .toolbar {
+                Button("Add Thanks", systemImage: "plus", action: addThanks)
             }
         }
+    }
+    
+    func addThanks() {
+        let newThanks = Thanks(title: "", body: "", date: Date(), isFavorite: false, icon: "", color: "")
+        modelContext.insert(newThanks)
+        path.append(newThanks)
+        do {
+            try modelContext.save()
+        } catch {
+            print("Unable to save thanks...")
+        }
         
+    }
+    
+    func deleteThanks(at offsets: IndexSet) {
+        for offset in offsets {
+            let thanks = thanksList[offset]
+            modelContext.delete(thanks)
+            do {
+                try modelContext.save()
+            } catch {
+                print("Unable to delete thanks...")
+            }
+            
+        }
     }
 }
 
