@@ -15,13 +15,16 @@ class Thanks: Identifiable {
     var reason: String
     var date: Date
     var isFavorite: Bool
-    @Attribute(.externalStorage) var photo: Data? = nil
+    var icon : String
+    var color: Color
     
-    init(title: String, body: String, date: Date, isFavorite: Bool) {
+    init(title: String, body: String, date: Date, isFavorite: Bool, icon: String, color: Color) {
         self.title = title
         self.reason = body
         self.date = date
         self.isFavorite = isFavorite
+        self.icon = icon
+        self.color = color
     }
 }
 
@@ -29,12 +32,12 @@ extension Thanks {
     
     static var sampleThanks: [Thanks] {
         [
-            Thanks(title: "My home", body: "I am thankful for the roof over my head", date: Date(), isFavorite: false),
-            Thanks(title: "My car", body: "My car takes me where I need to go", date: Date(), isFavorite: true),
-            Thanks(title: "My freinds", body: "They help my out", date: Date(), isFavorite: true),
-            Thanks(title: "Food", body: "It nourishes my body", date: Date(), isFavorite: false),
-            Thanks(title: "TV", body: "It keeps me entertained", date: Date(), isFavorite: false),
-            Thanks(title: "Radio", body: "For when the TV doesn't work", date: Date(), isFavorite: true)
+            Thanks(title: "My home", body: "I am thankful for the roof over my head", date: Date(), isFavorite: false, icon: "heart.fill", color: .red),
+            Thanks(title: "My car", body: "My car takes me where I need to go", date: Date(), isFavorite: true, icon: "heart.fill", color: .red),
+            Thanks(title: "My freinds", body: "They help my out", date: Date(), isFavorite: true, icon: "heart.fill", color: .red),
+            Thanks(title: "Food", body: "It nourishes my body", date: Date(), isFavorite: false, icon: "heart.fill", color: .red),
+            Thanks(title: "TV", body: "It keeps me entertained", date: Date(), isFavorite: false, icon: "heart.fill", color: .red),
+            Thanks(title: "Radio", body: "For when the TV doesn't work", date: Date(), isFavorite: true, icon: "heart.fill", color: .red)
         ]
     }
     
