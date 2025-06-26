@@ -10,12 +10,16 @@ import SwiftUI
 struct EditThanksView: View {
     
     @Bindable var thanks: Thanks
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         Form {
             Section {
                 TextField("I'm grateful for...", text: $thanks.title)
                 TextField("Why?", text: $thanks.reason)
+                Button("Ok") {
+                    dismiss()
+                }
             }
         }
     }
