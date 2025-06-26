@@ -19,7 +19,6 @@ struct ListThanksView: View {
                 List {
                     ForEach(thanksList) { thanks in
                         HStack {
-                            
                             NavigationLink(value: thanks) {
                                 ThanksRowView(thanks: thanks)
                             }
@@ -38,7 +37,7 @@ struct ListThanksView: View {
             }
             .navigationTitle("Thankful List")
             .navigationDestination(for: Thanks.self) { thanks in
-                Text(thanks.title)
+                ThanksDetailView(thanks: thanks)
             }
         }
         
