@@ -10,6 +10,7 @@ import SwiftUI
 struct AddThanksView: View {
     
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
     
     @State private var title: String = ""
     @State private var reason: String = ""
@@ -45,7 +46,7 @@ struct AddThanksView: View {
                 }
                 HStack() {
                     Button("Save") {
-                        // More to come...
+                        addThanks()
                         dismiss()
                     }
                     .buttonStyle(.bordered)
@@ -60,6 +61,17 @@ struct AddThanksView: View {
                 }
             }
         }
+    }
+    
+    func addThanks() {
+        let newThanks = Thanks(title: title, body: reason, date: Date(), isFavorite: isFavorite, icon: "", color: "")
+        modelContext.insert(newThanks)
+        do {
+            try modelContext.save()
+        } catch {
+            print("Unable to save thanks...")
+        }
+        
     }
 }
 

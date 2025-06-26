@@ -10,6 +10,7 @@ import SwiftUI
 struct TLCustomTabBarView: View {
     @Binding var index: Int
     @State private var showAdd: Bool = false
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         VStack {
