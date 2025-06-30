@@ -41,9 +41,9 @@ struct ListThanksView: View {
             .navigationDestination(for: Thanks.self) { thanks in
                 EditThanksView(thanks: thanks)
             }
-            .toolbar {
-                Button("Add Thanks", systemImage: "plus", action: addThanks)
-            }
+//            .toolbar {
+//                Button("Add Thanks", systemImage: "plus", action: addThanks)
+//            }
         }
     }
     
