@@ -15,6 +15,9 @@ struct AddThanksView: View {
     @State private var title: String = ""
     @State private var reason: String = ""
     @State private var isFavorite: Bool = false
+    @State private var selectedIcon: Icons = .star
+    @State private var selectedColor: Color = .blue
+    @State private var showAddView: Bool = false
     
     var body: some View {
         VStack {
@@ -24,7 +27,7 @@ struct AddThanksView: View {
                 ZStack(alignment: .leading) {
                     VStack(alignment: .leading) {
                         if reason.isEmpty {
-                            Text("Write a reason why you're grateful.")
+                            Text("Why?")
                                 .foregroundColor(.secondary.opacity(0.5))
                         }
                         
@@ -44,6 +47,19 @@ struct AddThanksView: View {
                         isFavorite ? Image(systemName: "heart.fill") : Image(systemName: "heart")
                     }
                 }
+                HStack {
+                    Button {
+                        showAddView.toggle()
+                    } label: {
+                        Text("Select Icon")
+                    }
+                    
+                    Spacer()
+                    
+                    Image(systemName: selectedIcon.rawValue)
+                        .foregroundStyle(selectedColor)
+
+                }
                 HStack() {
                     Button("Save") {
                         addThanks()
@@ -59,6 +75,10 @@ struct AddThanksView: View {
                     }
                     .buttonStyle(.bordered)
                 }
+            }
+            .sheet(isPresented: $showAddView) {
+                IconPickerView(selectedIcon: $selectedIcon, selectedColor: $selectedColor)
+                    .presentationDetents([.medium])
             }
         }
     }
