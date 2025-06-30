@@ -8,15 +8,33 @@
 import SwiftUI
 
 struct IconPickerView: View {
-
-    @State private var selectedIcon: Icons = .star
-    @State private var selectedColor: Color = .red
+    
+    @Binding var selectedIcon: Icons
+    @Binding var selectedColor: Color
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            Picker("Icons", selection: $selectedIcon) {
+                ForEach(Icons.allCases) { icon in
+                    Image(systemName: icon.rawValue)
+                }
+            }
+            .pickerStyle(.menu)
+            
+            VStack {
+                ColorPicker("Set the Icon color", selection: $selectedColor)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        
+        Image(systemName: selectedIcon.rawValue)
+            .font(.largeTitle)
+            .foregroundStyle(selectedColor)
+        
+        Spacer()
     }
 }
 
 #Preview {
-    IconPickerView()
+    IconPickerView(selectedIcon: .constant(.circle), selectedColor: .constant(.red))
 }
