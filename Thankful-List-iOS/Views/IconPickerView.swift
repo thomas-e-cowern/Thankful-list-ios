@@ -9,6 +9,8 @@ import SwiftUI
 
 struct IconPickerView: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     @Binding var selectedIcon: Icons
     @Binding var selectedColor: Color
     
@@ -25,6 +27,13 @@ struct IconPickerView: View {
                 ColorPicker("Set the Icon color", selection: $selectedColor)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            Button {
+                dismiss()
+            } label: {
+                Text("Ok")
+            }
+
         }
         
         Image(systemName: selectedIcon.rawValue)
