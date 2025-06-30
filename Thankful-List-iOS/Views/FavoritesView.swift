@@ -6,26 +6,55 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct FavoritesView: View {
+    
+    @Environment(\.modelContext) private var modelContext
+    @Query private var thanksList: [Thanks]
+    @Query(filter: #Predicate<Thanks> { thanks in
+        
+        thanks.isFavorite == true
+        
+    }) var favoriteThanks: [Thanks]
+    @State private var path = [Thanks]()
+    
     var body: some View {
         
-        ZStack {
-            TLCustomColors.backgroundColors.ignoresSafeArea()
-            List {
-                ForEach(0..<10) { _ in
-                    HStack() {
-                        VStack(alignment: .leading) {
-                            Text("Something I'm thankful for")
-                            Text("Feb 1, 2025")
-                                .font(.caption)
+        NavigationStack(path: $path) {
+            ZStack {
+                TLCustomColors.backgroundColors.ignoresSafeArea()
+                VStack {
+                    List {
+                        ForEach(favoriteThanks) { thanks in
+                            HStack {
+                                NavigationLink(value: thanks) {
+                                    ThanksRowView(thanks: thanks)
+                                }
+                            }
                         }
-                        Spacer()
-                        Image(systemName: "heart.fill")
+                        .onDelete(perform: deleteThanks)
+                        .foregroundStyle(TLCustomColors.textColors)
                     }
                 }
-                .foregroundStyle(TLCustomColors.textColors)
             }
+            .navigationTitle("Favorites List")
+            .navigationDestination(for: Thanks.self) { thanks in
+                EditThanksView(thanks: thanks)
+            }
+        }
+    }
+    
+    func deleteThanks(at offsets: IndexSet) {
+        for offset in offsets {
+            let thanks = thanksList[offset]
+            modelContext.delete(thanks)
+            do {
+                try modelContext.save()
+            } catch {
+                print("Unable to delete thanks...")
+            }
+            
         }
     }
 }
