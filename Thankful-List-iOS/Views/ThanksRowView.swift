@@ -27,7 +27,7 @@ struct ThanksRowView: View {
                 .foregroundStyle(TLCustomColors.textColors)
                 
                 Spacer()
-                Image(systemName: "heart.fill")
+                Image(systemName: thanks.isFavorite ? "heart.fill" : "heart")
                     .foregroundStyle(.red)
             }
         }
