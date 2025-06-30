@@ -84,7 +84,7 @@ struct AddThanksView: View {
     }
     
     func addThanks() {
-        let newThanks = Thanks(title: title, body: reason, date: Date(), isFavorite: isFavorite, icon: "", color: "")
+        let newThanks = Thanks(title: title, body: reason, date: Date(), isFavorite: isFavorite, icon: selectedIcon.rawValue, color: selectedColor.toHexString() ?? "#007AFF")
         modelContext.insert(newThanks)
         do {
             try modelContext.save()
