@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @Environment(\.modelContext) private var modelContext
+    
+    @State private var showAlert: Bool = false
+    
     var body: some View {
         VStack(spacing: 30) {
             
             Section("Data") {
                 VStack(spacing: 20) {
-                        Text("The button below will erase all your data and start fresh.")
-                        
+                    Text("The button below will erase all your data and start fresh.")
+                    
                     VStack {
                         Text("Caution:")
                             .font(.title2)
@@ -22,11 +27,11 @@ struct SettingsView: View {
                     }
                     .foregroundStyle(.red).bold()
                     
-                        
+                    
                     HStack(spacing: 30) {
                         Text("Erase all data?")
                         Button(role: .destructive) {
-                            // More to come...
+                            showAlert.toggle()
                         } label: {
                             Text("Erase data")
                         }
@@ -53,6 +58,22 @@ struct SettingsView: View {
         .background {
             Color(TLCustomColors.backgroundColors)
                 .ignoresSafeArea()
+        }
+        .alert("Delete all data?  This is irreversible.", isPresented: $showAlert) {
+            Button {
+                deleteAllData()
+            } label: {
+                Text("Delete all data!")
+            }
+
+        }
+    }
+    
+    func deleteAllData() {
+        do {
+            try modelContext.delete(model:Thanks.self)
+        } catch {
+            fatalError("Error deleting data: \(error.localizedDescription)")
         }
     }
 }
