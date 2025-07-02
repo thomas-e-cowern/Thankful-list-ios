@@ -13,8 +13,6 @@ struct EditThanksView: View {
     @Environment(\.dismiss) var dismiss
     
     @State private var showIconView: Bool = false
-    @State private var selectedIcon: Icons = .star
-    @State private var selectedColor: Color = .blue
     
     let columns = [
         GridItem(.adaptive(minimum: 100))
@@ -37,29 +35,46 @@ struct EditThanksView: View {
                             thanks.isFavorite ? Image(systemName: "heart.fill") : Image(systemName: "heart")
                         }
                     }
-                    Image(systemName: thanks.icon)
-                        .foregroundStyle(thanks.hexColor)
-                }
-                
-                
-            }
-            
-            Section {
-                HStack() {
-                    Button("Save") {
-                        dismiss()
+                    HStack {
+                        Text("Icon")
+                        
+                        Spacer()
+                        
+                        Image(systemName: thanks.icon)
+                            .foregroundStyle(thanks.hexColor)
                     }
-                    .buttonStyle(.bordered)
                     
-                    Spacer()
+//                    LazyVGrid(columns: columns, spacing: 20) {
+//                        ForEach(Icons.allCases) { icon in
+//                            Button {
+//                                // More to come...
+//                            } label: {
+//                                HStack {
+//                                    Image(systemName: icon.rawValue)
+//                                        .foregroundStyle(thanks.hexColor)
+//                                }
+//                            }
+//                        }
+//                    }
                     
-                    Button("Cancel") {
-                        // More to come...
-                        dismiss()
+                    
+                    HStack() {
+                        Button("Save") {
+                            dismiss()
+                        }
+                        .buttonStyle(.bordered)
+                        
+                        Spacer()
+                        
+                        Button("Cancel") {
+                            // More to come...
+                            dismiss()
+                        }
+                        .buttonStyle(.bordered)
                     }
-                    .buttonStyle(.bordered)
+                    
                 }
-            }
+            } // End of form
         }
         .navigationTitle("\(thanks.title)")
     }
