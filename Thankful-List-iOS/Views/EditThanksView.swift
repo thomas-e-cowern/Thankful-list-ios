@@ -10,9 +10,13 @@ import SwiftUI
 struct EditThanksView: View {
     
     @Bindable var thanks: Thanks
+    
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) var dismiss
     
     @State private var showIconView: Bool = false
+    @State var selectedIcon: Icons
+    @State var selectedColor: Color
     
     let columns = [
         GridItem(.adaptive(minimum: 100))
@@ -36,26 +40,17 @@ struct EditThanksView: View {
                         }
                     }
                     HStack {
-                        Text("Icon")
+                        Button {
+                            showIconView.toggle()
+                        } label: {
+                            Text("Select Icon")
+                        }
                         
                         Spacer()
                         
                         Image(systemName: thanks.icon)
                             .foregroundStyle(thanks.hexColor)
                     }
-                    
-//                    LazyVGrid(columns: columns, spacing: 20) {
-//                        ForEach(Icons.allCases) { icon in
-//                            Button {
-//                                // More to come...
-//                            } label: {
-//                                HStack {
-//                                    Image(systemName: icon.rawValue)
-//                                        .foregroundStyle(thanks.hexColor)
-//                                }
-//                            }
-//                        }
-//                    }
                     
                     
                     HStack() {
@@ -77,9 +72,17 @@ struct EditThanksView: View {
             } // End of form
         }
         .navigationTitle("\(thanks.title)")
+        .sheet(isPresented: $showIconView, onDismiss: saveChanges) {
+            IconPickerView(selectedIcon: $selectedIcon, selectedColor: $selectedColor)
+        }
+    }
+    
+    func saveChanges() {
+        thanks.icon = selectedIcon.rawValue
+        thanks.color = selectedColor.toHexString() ?? "#007AFF"
     }
 }
 
 #Preview {
-    EditThanksView(thanks: Thanks.sampleThanks[2])
+    EditThanksView(thanks: Thanks.sampleThanks[2], selectedIcon: Icons.star, selectedColor: Thanks.sampleThanks[2].hexColor)
 }
