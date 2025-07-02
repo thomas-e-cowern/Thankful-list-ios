@@ -39,7 +39,7 @@ struct ListThanksView: View {
             }
             .navigationTitle("Thankful List")
             .navigationDestination(for: Thanks.self) { thanks in
-                EditThanksView(thanks: thanks)
+                EditThanksView(thanks: thanks, selectedIcon: Icons(rawValue: thanks.icon) ?? .star, selectedColor: thanks.hexColor)
             }
 //            .toolbar {
 //                Button("Add Thanks", systemImage: "plus", action: addThanks)

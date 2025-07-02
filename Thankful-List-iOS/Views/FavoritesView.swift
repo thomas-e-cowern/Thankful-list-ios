@@ -40,7 +40,7 @@ struct FavoritesView: View {
             }
             .navigationTitle("Favorites List")
             .navigationDestination(for: Thanks.self) { thanks in
-                EditThanksView(thanks: thanks)
+                EditThanksView(thanks: thanks, selectedIcon: Icons(rawValue: thanks.icon) ?? .star, selectedColor: thanks.hexColor)
             }
         }
     }
