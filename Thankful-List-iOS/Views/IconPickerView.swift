@@ -29,6 +29,7 @@ struct IconPickerView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             
             Button {
+                
                 dismiss()
             } label: {
                 Text("Ok")
