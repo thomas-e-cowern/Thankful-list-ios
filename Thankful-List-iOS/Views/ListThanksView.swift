@@ -13,6 +13,7 @@ struct ListThanksView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var thanksList: [Thanks]
     @State private var path = [Thanks]()
+    @State private var refreshView = false
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -27,6 +28,7 @@ struct ListThanksView: View {
                     }
                     .onDelete(perform: deleteThanks)
                 }
+                .id(refreshView)
                 .background(TLCustomColors.backgroundColors)
                 .scrollContentBackground(.hidden)
                 .overlay {
@@ -37,13 +39,13 @@ struct ListThanksView: View {
                     }
                 }
             }
+            .onAppear {
+                refreshView.toggle()
+            }
             .navigationTitle("Thankful List")
             .navigationDestination(for: Thanks.self) { thanks in
                 EditThanksView(thanks: thanks, selectedIcon: Icons(rawValue: thanks.icon) ?? .star, selectedColor: thanks.hexColor)
             }
-//            .toolbar {
-//                Button("Add Thanks", systemImage: "plus", action: addThanks)
-//            }
         }
     }
     

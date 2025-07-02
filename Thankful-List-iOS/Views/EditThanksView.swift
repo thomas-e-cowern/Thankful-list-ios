@@ -12,6 +12,7 @@ struct EditThanksView: View {
     @Bindable var thanks: Thanks
     
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.undoManager) var undoManager
     @Environment(\.dismiss) var dismiss
     
     @State private var showIconView: Bool = false
@@ -39,6 +40,7 @@ struct EditThanksView: View {
                             thanks.isFavorite ? Image(systemName: "heart.fill") : Image(systemName: "heart")
                         }
                     }
+                    
                     HStack {
                         Button {
                             showIconView.toggle()
@@ -52,7 +54,6 @@ struct EditThanksView: View {
                             .foregroundStyle(thanks.hexColor)
                     }
                     
-                    
                     HStack() {
                         Button("Save") {
                             dismiss()
@@ -62,15 +63,14 @@ struct EditThanksView: View {
                         Spacer()
                         
                         Button("Cancel") {
-                            // More to come...
+                            rollback()
                             dismiss()
                         }
                         .buttonStyle(.bordered)
                     }
-                    
                 }
             } // End of form
-        }
+        } // End of VStack
         .navigationTitle("\(thanks.title)")
         .sheet(isPresented: $showIconView, onDismiss: saveChanges) {
             IconPickerView(selectedIcon: $selectedIcon, selectedColor: $selectedColor)
@@ -78,8 +78,13 @@ struct EditThanksView: View {
     }
     
     func saveChanges() {
+        print("Saved")
         thanks.icon = selectedIcon.rawValue
         thanks.color = selectedColor.toHexString() ?? "#007AFF"
+    }
+    
+    func rollback() {
+        modelContext.undoManager?.undo()
     }
 }
 
