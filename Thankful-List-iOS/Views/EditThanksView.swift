@@ -59,14 +59,7 @@ struct EditThanksView: View {
                             dismiss()
                         }
                         .buttonStyle(.bordered)
-                        
-                        Spacer()
-                        
-                        Button("Cancel") {
-                            rollback()
-                            dismiss()
-                        }
-                        .buttonStyle(.bordered)
+                        .centered()
                     }
                 }
             } // End of form
@@ -81,10 +74,6 @@ struct EditThanksView: View {
         print("Saved")
         thanks.icon = selectedIcon.rawValue
         thanks.color = selectedColor.toHexString() ?? "#007AFF"
-    }
-    
-    func rollback() {
-        modelContext.undoManager?.undo()
     }
 }
 
