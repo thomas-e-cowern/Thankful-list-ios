@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ThanksEditor: View {
     
-    let thanks: Thanks? = nil
+    let thanks: Thanks?
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
@@ -114,7 +114,7 @@ struct ThanksEditor: View {
             thanks.icon = selectedIcon?.rawValue ?? Icons.star.rawValue
             thanks.color = selectedColor.toHexString() ?? "#007AFF"
         } else {
-            let newThanks = Thanks(title: title, body: reason, date: Date(), isFavorite: isFavorite, icon: selectedIcon!.rawValue, color: selectedColor.toHexString() ?? "#007AFF")
+            let newThanks = Thanks(title: title, body: reason, date: Date(), isFavorite: isFavorite, icon: selectedIcon?.rawValue ?? Icons.star.rawValue, color: selectedColor.toHexString() ?? "#007AFF")
             modelContext.insert(newThanks)
             do {
                 try modelContext.save()

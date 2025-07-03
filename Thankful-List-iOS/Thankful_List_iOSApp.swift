@@ -13,7 +13,7 @@ struct Thankful_List_iOSApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .modelContainer(for: Thanks.self, isAutosaveEnabled: false)
+                .modelContainer(for: Thanks.self)
         }
     }
 }

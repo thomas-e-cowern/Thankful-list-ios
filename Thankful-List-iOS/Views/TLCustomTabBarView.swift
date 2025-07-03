@@ -79,8 +79,8 @@ struct TLCustomTabBarView: View {
         }
         .offset(y: -15)
         .sheet(isPresented: $showAdd) {
-            AddThanksView()
-                .presentationDetents([.medium])
+            ThanksEditor(thanks: nil)
+//                .presentationDetents([.medium])
         }
     }
 }
