@@ -30,7 +30,9 @@ struct FavoritesView: View {
                             HStack {
                                 NavigationLink(value: thanks) {
                                     ThanksRowView(thanks: thanks)
+                                        
                                 }
+                               
                             }
                         }
                         .onDelete(perform: deleteThanks)

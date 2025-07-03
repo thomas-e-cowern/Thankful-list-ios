@@ -18,12 +18,17 @@ struct EditThanksView: View {
     @State var selectedIcon: Icons
     @State var selectedColor: Color
     
+    var disableSave: Bool {
+        thanks.title.isEmpty || thanks.reason.isEmpty
+    }
+    
     var body: some View {
         VStack {
             Form {
                 Section {
                     TextField("I'm grateful for...", text: $thanks.title)
-                    TextField("Why?", text: $thanks.reason)
+                    TextField("Why?", text: $thanks.reason, axis: .vertical)
+                        .lineLimit(5)
                     HStack {
                         Text("Mark as favorite")
                         
@@ -52,16 +57,25 @@ struct EditThanksView: View {
                     }
                     
                     HStack() {
-                        Button("Save") {
-                            dismiss()
+                        Group {
+                            Button("Save") {
+                                dismiss()
+                            }
+                            .buttonStyle(.bordered)
+                            
+                            Button("Cancel") {
+                                dismiss()
+                            }
+                            .buttonStyle(.bordered)
                         }
-                        .buttonStyle(.bordered)
                         .centered()
                     }
+                    .disabled(disableSave)
                 }
             } // End of form
         } // End of VStack
         .navigationTitle("\(thanks.title)")
+        .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $showIconView, onDismiss: saveChanges) {
             IconPickerView(selectedIcon: $selectedIcon, selectedColor: $selectedColor)
         }

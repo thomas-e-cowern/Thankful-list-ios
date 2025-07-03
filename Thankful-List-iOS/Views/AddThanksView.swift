@@ -19,6 +19,10 @@ struct AddThanksView: View {
     @State private var selectedColor: Color = .blue
     @State private var showAddView: Bool = false
     
+    var disableSave: Bool {
+        title.isEmpty || reason.isEmpty
+    }
+    
     var body: some View {
         VStack {
             Form {
@@ -46,6 +50,7 @@ struct AddThanksView: View {
                     } label: {
                         isFavorite ? Image(systemName: "heart.fill") : Image(systemName: "heart")
                     }
+                    .foregroundStyle(.red)
                 }
                 HStack {
                     Button {
@@ -66,6 +71,7 @@ struct AddThanksView: View {
                         dismiss()
                     }
                     .buttonStyle(.bordered)
+                    .disabled(disableSave)
                     
                     Spacer()
                     

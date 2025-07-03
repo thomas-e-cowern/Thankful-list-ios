@@ -39,9 +39,9 @@ struct ListThanksView: View {
                     }
                 }
             }
-            .onAppear {
-                refreshView.toggle()
-            }
+//            .onAppear {
+//                refreshView.toggle()
+//            }
             .navigationTitle("Thankful List")
             .navigationDestination(for: Thanks.self) { thanks in
                 EditThanksView(thanks: thanks, selectedIcon: Icons(rawValue: thanks.icon) ?? .star, selectedColor: thanks.hexColor)
