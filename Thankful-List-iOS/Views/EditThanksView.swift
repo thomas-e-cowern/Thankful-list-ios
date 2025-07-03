@@ -12,16 +12,11 @@ struct EditThanksView: View {
     @Bindable var thanks: Thanks
     
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.undoManager) var undoManager
     @Environment(\.dismiss) var dismiss
     
     @State private var showIconView: Bool = false
     @State var selectedIcon: Icons
     @State var selectedColor: Color
-    
-    let columns = [
-        GridItem(.adaptive(minimum: 100))
-    ]
     
     var body: some View {
         VStack {
@@ -38,7 +33,9 @@ struct EditThanksView: View {
                             thanks.isFavorite.toggle()
                         } label: {
                             thanks.isFavorite ? Image(systemName: "heart.fill") : Image(systemName: "heart")
+                                
                         }
+                        .foregroundStyle(.red)
                     }
                     
                     HStack {
