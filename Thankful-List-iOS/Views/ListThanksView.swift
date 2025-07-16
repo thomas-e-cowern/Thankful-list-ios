@@ -33,7 +33,7 @@ struct ListThanksView: View {
                 .scrollContentBackground(.hidden)
                 .overlay {
                     if thanksList.isEmpty {
-                        ContentUnavailableView("You don't have any Thanks yet!  ", image: "heart.square", description: Text("Add something your thankful for to begin the list!"))
+                        ContentUnavailableView("You don't have any Thanks yet!", systemImage: "heart.square", description: Text("Add something your grateful for..."))
                             .background(TLCustomColors.backgroundColors)
                             .foregroundStyle(TLCustomColors.textColors)
                     }
