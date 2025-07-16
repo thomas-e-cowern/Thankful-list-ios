@@ -10,6 +10,8 @@ import SwiftUI
 struct TLCustomTabBarView: View {
     @Binding var index: Int
     @State private var showAdd: Bool = false
+    @Binding var path: NavigationPath
+    @Binding var thanks: Thanks
     @Environment(\.modelContext) private var modelContext
     
     var body: some View {
@@ -79,12 +81,13 @@ struct TLCustomTabBarView: View {
         }
         .offset(y: -15)
         .sheet(isPresented: $showAdd) {
-            ThanksEditor(thanks: nil)
-//                .presentationDetents([.medium])
+            ThanksEditor(thanks: thanks)
+            //                .presentationDetents([.medium])
         }
+        
     }
 }
 
-#Preview {
-    TLCustomTabBarView(index: .constant(1))
-}
+//#Preview {
+//    TLCustomTabBarView(index: .constant(1), path: NavigationPath)
+//}

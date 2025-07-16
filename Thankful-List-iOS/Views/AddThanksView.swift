@@ -65,22 +65,22 @@ struct AddThanksView: View {
                         .foregroundStyle(selectedColor)
 
                 }
-                HStack() {
-                    Button("Save") {
-                        addThanks()
-                        dismiss()
-                    }
-                    .buttonStyle(.bordered)
-                    .disabled(disableSave)
-                    
-                    Spacer()
-                    
-                    Button("Cancel") {
-                        // More to come...
-                        dismiss()
-                    }
-                    .buttonStyle(.bordered)
-                }
+//                HStack() {
+//                    Button("Save") {
+//                        addThanks()
+//                        dismiss()
+//                    }
+//                    .buttonStyle(.bordered)
+//                    .disabled(disableSave)
+//                    
+//                    Spacer()
+//                    
+//                    Button("Cancel") {
+//                        // More to come...
+//                        dismiss()
+//                    }
+//                    .buttonStyle(.bordered)
+//                }
             }
             .sheet(isPresented: $showAddView) {
                 IconPickerView(selectedIcon: $selectedIcon, selectedColor: $selectedColor)

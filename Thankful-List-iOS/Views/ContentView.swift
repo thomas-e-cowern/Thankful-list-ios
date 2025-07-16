@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
     
     @State var index: Int = 0
+    @State private var path = NavigationPath()
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         
@@ -29,10 +31,16 @@ struct ContentView: View {
                 HomeView()
             }
             
-            TLCustomTabBarView(index: $index)
+            TLCustomTabBarView(index: $index, path: $path, thanks: <#Binding<Thanks>#>)
         }
         .ignoresSafeArea(.all)
         .tint(TLCustomColors.accentsColors)
+    }
+    
+    func addThanks() {
+        let newThanks = Thanks(title: "", body: "", date: Date.now, isFavorite: false, icon: Icons.star.rawValue, color: "#007AFF")
+        modelContext.insert(newThanks)
+        path.append(newThanks)
     }
 }
 

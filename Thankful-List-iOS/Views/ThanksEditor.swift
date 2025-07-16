@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ThanksEditor: View {
     
-    let thanks: Thanks?
-    
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    
+    @Bindable var thanks: Thanks
     
     @State private var title: String = ""
     @State private var reason: String = ""
@@ -29,7 +29,7 @@ struct ThanksEditor: View {
         NavigationStack {
             VStack {
                 Form {
-                    TextField("What are you grateful for?", text: $title)
+                    TextField("What are you grateful for?????", text: $title)
                     
                     ZStack(alignment: .leading) {
                         VStack(alignment: .leading) {
@@ -77,52 +77,52 @@ struct ThanksEditor: View {
                     Text(editorTitle)
                 }
             }
-            .onAppear {
-                if let thanks {
-                    title = thanks.title
-                    reason = thanks.reason
-                    isFavorite = thanks.isFavorite
-                    selectedIcon = Icons(rawValue: thanks.icon) ?? .star
-                    selectedColor = thanks.hexColor
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        withAnimation {
-                            save()
-                            dismiss()
-                        }
-                    }
-                }
-                
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", role: .cancel) {
-                        dismiss()
-                    }
-                }
-            }
+//            .onAppear {
+//                if let thanks {
+//                    title = thanks.title
+//                    reason = thanks.reason
+//                    isFavorite = thanks.isFavorite
+//                    selectedIcon = Icons(rawValue: thanks.icon) ?? .star
+//                    selectedColor = thanks.hexColor
+//                }
+//            }
+//            .toolbar {
+//                ToolbarItem(placement: .confirmationAction) {
+//                    Button("Save") {
+//                        withAnimation {
+//                            save()
+//                            dismiss()
+//                        }
+//                    }
+//                }
+//                
+//                ToolbarItem(placement: .cancellationAction) {
+//                    Button("Cancel", role: .cancel) {
+//                        dismiss()
+//                    }
+//                }
+//            }
         }
     
     }
     
-    private func save() {
-        if let thanks {
-            thanks.title = title
-            thanks.reason = reason
-            thanks.isFavorite = isFavorite
-            thanks.icon = selectedIcon?.rawValue ?? Icons.star.rawValue
-            thanks.color = selectedColor.toHexString() ?? "#007AFF"
-        } else {
-            let newThanks = Thanks(title: title, body: reason, date: Date(), isFavorite: isFavorite, icon: selectedIcon?.rawValue ?? Icons.star.rawValue, color: selectedColor.toHexString() ?? "#007AFF")
-            modelContext.insert(newThanks)
-            do {
-                try modelContext.save()
-            } catch {
-                print("Unable to save thanks...")
-            }
-        }
-    }
+//    private func save() {
+//        if let thanks {
+//            thanks.title = title
+//            thanks.reason = reason
+//            thanks.isFavorite = isFavorite
+//            thanks.icon = selectedIcon?.rawValue ?? Icons.star.rawValue
+//            thanks.color = selectedColor.toHexString() ?? "#007AFF"
+//        } else {
+//            let newThanks = Thanks(title: title, body: reason, date: Date(), isFavorite: isFavorite, icon: selectedIcon?.rawValue ?? Icons.star.rawValue, color: selectedColor.toHexString() ?? "#007AFF")
+//            modelContext.insert(newThanks)
+//            do {
+//                try modelContext.save()
+//            } catch {
+//                print("Unable to save thanks...")
+//            }
+//        }
+//    }
 }
 
 //#Preview {

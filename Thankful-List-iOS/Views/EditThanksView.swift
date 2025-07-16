@@ -56,21 +56,21 @@ struct EditThanksView: View {
                             .foregroundStyle(thanks.hexColor)
                     }
                     
-                    HStack() {
-                        Group {
-                            Button("Save") {
-                                dismiss()
-                            }
-                            .buttonStyle(.bordered)
-                            
-                            Button("Cancel") {
-                                dismiss()
-                            }
-                            .buttonStyle(.bordered)
-                        }
-                        .centered()
-                    }
-                    .disabled(disableSave)
+//                    HStack() {
+//                        Group {
+//                            Button("Save") {
+//                                dismiss()
+//                            }
+//                            .buttonStyle(.bordered)
+//                            
+//                            Button("Cancel") {
+//                                dismiss()
+//                            }
+//                            .buttonStyle(.bordered)
+//                        }
+//                        .centered()
+//                    }
+//                    .disabled(disableSave)
                 }
             } // End of form
         } // End of VStack
